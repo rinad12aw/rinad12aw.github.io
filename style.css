@@ -95,14 +95,14 @@ body {
 }
 
 
-.login-wrapper {
+.index-wrapper {
     display: flex;
     justify-content: center;
     background: var(--bg-page);
     margin-top: 100px;
 }
 
-.login-card {
+.index-card {
     width: 950px;
     height: 520px;
     background: var(--bg-card);
@@ -112,7 +112,7 @@ body {
     overflow: hidden;
 }
 
-.login-left {
+.index-left {
     flex: 1;
     display: flex;
     justify-content: center;
@@ -120,31 +120,31 @@ body {
     border-right: 1px solid var(--border-color);
 }
 
-.login-logo-img {
+.index-logo-img {
     width: 270px;
     height: 250px;
 }
 
-.login-right {
+.index-right {
     flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.login-form {
+.index-form {
     width: 320px;
     display: flex;
     flex-direction: column;
 }
 
-.login-label {
+.index-label {
     margin-top: 18px;
     font-size: 14px;
     color: var(--text-color);
 }
 
-.login-input {
+.index-input {
     margin-top: 6px;
     padding: 14px;
     border-radius: 12px;
@@ -153,17 +153,17 @@ body {
     font-size: 14px;
 }
 
-.login-forgot {
+.index-forgot {
     text-align: right;
     margin-top: 6px;
     font-size: 12px;
 }
 
-.login-forgot a {
+.index-forgot a {
     color: var(--text-muted);
 }
 
-.login-btn {
+.index-btn {
     margin-top: 22px;
     padding: 14px;
     border-radius: 14px;
@@ -174,20 +174,20 @@ body {
     cursor: pointer;
 }
 
-.login-divider {
+.index-divider {
     text-align: center;
     margin: 22px 0;
     color: #aaa;
     font-size: 13px;
 }
 
-.login-socials {
+.index-socials {
     display: flex;
     justify-content: center;
     gap: 20px;
 }
 
-.login-social-circle {
+.index-social-circle {
     width: 50px;
     height: 50px;
     border-radius: 50%;
@@ -197,13 +197,13 @@ body {
     align-items: center;
 }
 
-.login-signup {
+.index-signup {
     text-align: center;
     margin-top: 20px;
     font-size: 14px;
 }
 
-.login-signup a {
+.index-signup a {
     color: var(--primary-color);
 }
 
