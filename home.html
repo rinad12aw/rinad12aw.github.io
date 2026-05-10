@@ -1,0 +1,91 @@
+{% extends "layouts/layout.html" %}
+
+{% block content %}
+
+<div class="home-container">
+
+    <div class="home-left">
+
+        <div class="home-date">
+            <div class="home-day">{{ now.strftime("%A") }}</div>
+            <div class="home-date-num">{{ now.strftime("%d %b") }}</div>
+        </div>
+
+        <h1 class="home-title">Welcome, {{ user_name }}</h1>
+
+        <img src="/assets/images/logo.png" class="home-logo">
+
+        <p class="home-sub">Early Detection, Better Protection</p>
+
+    </div>
+
+    <div class="home-right">
+
+        <a href="#" class="home-card">
+            <div>
+                <h3>View Test Results</h3>
+                <p>Urine Test Results And Risk Levels</p>
+            </div>
+            <div class="home-icon">📋</div>
+        </a>
+
+        <a href="/feedback" class="home-card">
+            <div>
+                <h3>Provide Feedback</h3>
+                <p>Help Us Improve By Sharing Feedback Or Reporting Issues.</p>
+            </div>
+            <div class="home-icon">📝</div>
+        </a>
+
+    </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-container">
+    
+    <div class="footer-content">
+      
+      <!-- ABOUT SECTION -->
+      <div class="footer-section">
+        <h3 class="footer-section-title">About</h3>
+        <p class="footer-section-text">
+          UTI+ Monitor is an advanced platform designed to empower patients with intelligent health insights and early detection capabilities for urinary tract infections. Our mission is to improve quality of life through accessible and personalized UTI monitoring.
+        </p>
+      </div>
+
+      <!-- CONTACT SECTION -->
+      <div class="footer-section">
+        <h3 class="footer-section-title">Contact Us</h3>
+        <div class="footer-section-text">
+          <p><strong>Email:</strong> support@utimonitor.com</p>
+          <p><strong>Phone:</strong> +966 50 123 4567</p>
+        </div>
+      </div>
+
+    
+        <!-- SOCIALS SECTION -->
+<div class="footer-section">
+  <h3 class="footer-section-title">Follow Us</h3>
+  <div class="footer-socials">
+    <a href="#" class="footer-social-icon" title="X">𝕏</a>
+    <a href="#" class="footer-social-icon" title="LinkedIn">in</a>
+  </div>
+</div>
+
+
+    </div>
+
+    <!-- BOTTOM COPYRIGHT -->
+    <div class="footer-divider">
+      <p class="footer-copyright">© 2026 UTI+ Monitor. All rights reserved.</p>
+    </div>
+
+  </div>
+</footer>
+
+{% endblock %}
+
+
+
