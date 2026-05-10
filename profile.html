@@ -1,0 +1,20 @@
+{% extends "layouts/layout.html" %}
+
+{% block content %}
+
+<div class="profile-container">
+
+    <div class="profile-card">
+
+        <div class="profile-avatar">👤</div>
+        <div class="profile-name">{{ user_name }}</div>
+
+        <a href="/update_profile" class="profile-btn">Update Profile</a>
+        <a href="/update_password" class="profile-btn">Update Password</a>
+        <a href="/logout" class="profile-btn">Log Out</a>
+
+    </div>
+
+</div>
+
+{% endblock %}

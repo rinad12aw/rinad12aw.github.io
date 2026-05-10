@@ -1,0 +1,41 @@
+{% extends "layouts/layout.html" %}
+
+{% block content %}
+
+<div class="register-wrapper">
+    <div class="register-card">
+
+        <div class="register-left">
+            <h2 class="register-title">New Account</h2>
+            <img src="/assets/images/logo.png" class="register-logo">
+        </div>
+
+        <div class="register-right">
+            <form method="POST" class="register-form">
+
+                <label class="register-label">Full name</label>
+                <input class="register-input" type="text" name="name" placeholder="ex: renad alsoumali" required>
+
+       <label class="register-label">Email</label>
+                <input class="register-input" type="email" name="email" placeholder="example@example.com" required>
+
+
+                <label class="register-label">Password</label>
+                <input class="register-input" type="password" name="password" placeholder="********" required>
+
+                <label class="register-label">Confirm password</label>
+                <input class="register-input" type="password" name="confirm" placeholder="********" required>
+
+         
+                <label class="register-label">Date of birth</label>
+                <input class="register-input" type="date" name="birth_date" required>
+
+                <button type="submit" class="register-btn">Sign Up</button>
+
+            </form>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

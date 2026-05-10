@@ -1,0 +1,84 @@
+{% extends "layouts/layout.html" %}
+
+{% block content %}
+
+{% set color = t[7]|lower|trim %}
+{% set percent = ( t[6] * 100)|round(1)  %}
+
+{% if percent <= 0 %}
+    {% set percent = 10 %}
+{% endif %}
+
+{% if color == "red" %}
+    {% set rec = "High risk detected. Please consult a doctor immediately." %}
+{% elif color == "yellow" %}
+    {% set rec = "Moderate risk. Monitor your condition and retest soon." %}
+{% else %}
+    {% set rec = "No infection detected. Stay healthy and hydrated." %}
+{% endif %}
+
+<div class="ri-page">
+
+    <div class="ri-top">
+
+        <div class="ri-date">
+            {{ t[8].split(" ")[0] }} - {{ t[8].split(" ")[1][:5] }}
+        </div>
+    </div>
+
+    <h2 class="ri-title">Result Details</h2>
+
+
+    <div class="ri-card">
+
+        <div class="ri-label">Color Indicator</div>
+
+        <div class="ri-bar-bg">
+            <div class="ri-bar ri-{{ color }}" style="width: {{ percent }}%;"></div>
+        </div>
+
+        <div class="ri-row">
+            <div>
+                Risk Level:
+                <span class="ri-text ri-{{ color }}">{{ color|capitalize }}</span>
+            </div>
+
+            <div class="ri-line"></div>
+
+            <div>
+                Risk Percentage:
+                <span class="ri-text">{{ percent }}%</span>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="ri-card">
+
+        <div class="ri-label ri-center">What Should You Do?</div>
+
+        <div class="ri-rec">
+            {{ rec }}
+        </div>
+
+    </div>
+
+
+    <div class="ri-card">
+
+        <div class="ri-label">Test Values</div>
+
+        <div class="ri-values">
+            <div>Leukocytes: {{ t[1] }}</div>
+            <div>Nitrite: {{ t[2] }}</div>
+            <div>Blood: {{ t[3] }}</div>
+            <div>Protein: {{ t[4] }}</div>
+            <div>pH: {{ t[5] }}</div>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

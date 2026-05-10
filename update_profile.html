@@ -1,0 +1,26 @@
+{% extends "layouts/layout.html" %}
+
+{% block content %}
+
+<div class="form-container">
+
+    <h2 class="form-title">Account Information</h2>
+
+    <form method="POST" class="form-card">
+
+        <label>Full name</label>
+        <input name="name" value="{{ user[0] }}" required>
+
+        <label>Email</label>
+        <input name="email" value="{{ user[1] }}" required>
+
+        <label>Date of birth</label>
+        <input name="birth_date" value="{{ user[2] }}" required>
+
+        <button class="form-btn">Save</button>
+
+    </form>
+
+</div>
+
+{% endblock %}

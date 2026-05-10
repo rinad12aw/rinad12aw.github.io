@@ -1,0 +1,90 @@
+{% extends "layouts/layout.html" %}
+
+{% block content %}
+
+<div class="results-page">
+
+    <!-- LEFT (calendar) -->
+    <div class="left-panel">
+
+        <div class="title">
+            Check Your Daily Test Status <br> And Risk Level !
+        </div>
+
+        <div class="days">
+
+            {% for d in days %}
+            <a href="/results?date={{ d.date }}" class="day-box {% if d.date == selected_date %}active{% endif %}">
+
+                <div>{{ d.day }}</div>
+                <small>{{ d.name }}</small>
+
+            </a>
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+
+    <!-- RIGHT -->
+    <div class="right-panel">
+
+        <div class="header">
+            <div>
+                <h3>Results For The Selected Date</h3>
+                <p>Showing risk level and measurement time</p>
+            </div>
+
+            <a href="/new_test" class="new-btn">+ New Test</a>
+        </div>
+
+
+        {% for t in tests %}
+
+        <div class="card" onclick="goTo({{ t[0] }})">
+
+            <div class="left">
+                <div class="icon">🕒</div>
+                <div>
+                    <div class="test">Test {{ loop.index }}</div>
+                    <div class="time">
+    {{ (t[-3] * 100)|round(1) }}%
+</div>
+                </div>
+            </div>
+
+            <div class="middle">
+                <div class="bar-bg">
+
+                    <div class="bar-fill {{ t[-2]|lower|trim }}"
+                        style="width: {{ (t[-3]*100)|round(0) if t[-3] > 0 else 10 }}%;">
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="right">More details</div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+<script>
+    window.addEventListener("pageshow", function (event) {
+    if (event.persisted) {
+        window.location.reload();
+    }
+});
+    function goTo(id) {
+        window.location.href = "/result_info/" + id;
+    }
+</script>
+
+
+
+{% endblock %}

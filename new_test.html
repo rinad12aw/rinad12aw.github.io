@@ -1,0 +1,153 @@
+{% extends "layouts/layout.html" %}
+
+{% block content %}
+
+<div class="nt-wrapper">
+
+    <div class="nt-card">
+
+        <div class="nt-title">New Test</div>
+
+        <form id="testForm" onsubmit="startTest(event)">
+
+            <div class="nt-field">
+                <label>Leukocytes</label>
+                <input id="leukocytes" type="text" inputmode="decimal" pattern="^\d*\.?\d+$" required>
+            </div>
+
+            <div class="nt-field">
+                <label>Nitrite</label>
+                <select id="nitrite" required>
+                    <option value="0">0 (No)</option>
+                    <option value="1">1 (Yes)</option>
+                </select>
+            </div>
+
+            <div class="nt-field">
+                <label>Blood</label>
+                <input id="blood" type="text" inputmode="decimal" pattern="^\d*\.?\d+$" required>
+            </div>
+
+            <div class="nt-field">
+                <label>Protein</label>
+                <input id="protein" type="text" inputmode="decimal" pattern="^\d*\.?\d+$" required>
+            </div>
+
+            <div class="nt-field">
+                <label>pH</label>
+                <input id="ph" type="text" inputmode="decimal" pattern="^\d*\.?\d+$" required>
+            </div>
+
+            <button type="button" class="nt-device-btn" onclick="readDevice()">
+                Read from Device
+            </button>
+
+            <button id="submitBtn" type="submit" class="nt-submit-btn">
+                Start Test
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+<script>
+
+let isSubmitting = false;
+
+document.querySelectorAll('input[inputmode="decimal"]').forEach(input => {
+    input.addEventListener("input", function () {
+        this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');
+    });
+});
+
+function readDevice() {
+    fetch("/read_device")
+    .then(res => res.json())
+    .then(data => {
+
+        if (data.error) {
+            alert(data.error);
+            return;
+        }
+
+        if (data.leukocytes !== undefined)
+            document.getElementById("leukocytes").value = data.leukocytes;
+
+        if (data.nitrite !== undefined)
+            document.getElementById("nitrite").value = data.nitrite;
+
+        if (data.blood !== undefined)
+            document.getElementById("blood").value = data.blood;
+
+        if (data.protein !== undefined)
+            document.getElementById("protein").value = data.protein;
+
+        if (data.ph !== undefined)
+            document.getElementById("ph").value = data.ph;
+    })
+    .catch(() => {
+        alert("Device connection failed");
+    });
+}
+
+function startTest(e) {
+    e.preventDefault();
+
+    if (isSubmitting) return;
+
+    const leukocytes = document.getElementById("leukocytes").value.trim();
+    const nitrite = document.getElementById("nitrite").value;
+    const blood = document.getElementById("blood").value.trim();
+    const protein = document.getElementById("protein").value.trim();
+    const ph = document.getElementById("ph").value.trim();
+
+    if (!leukocytes || !nitrite || !blood || !protein || !ph) {
+        alert("Please fill all fields");
+        return;
+    }
+
+    const btn = document.getElementById("submitBtn");
+    btn.innerText = "Processing...";
+    btn.disabled = true;
+
+    isSubmitting = true;
+
+    fetch("/predict", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+            leukocytes: parseFloat(leukocytes),
+            nitrite: parseInt(nitrite),
+            blood: parseFloat(blood),
+            protein: parseFloat(protein),
+            ph: parseFloat(ph)
+        })
+    })
+    .then(r => r.json())
+    .then(res => {
+        if (res.error) {
+            alert(res.error);
+            resetBtn();
+            return;
+        }
+
+        window.location.replace("/result_info/" + res.test_id);
+    })
+    .catch(() => {
+        alert("Error occurred");
+        resetBtn();
+    });
+}
+
+function resetBtn(){
+    const btn = document.getElementById("submitBtn");
+    btn.innerText = "Start Test";
+    btn.disabled = false;
+    isSubmitting = false;
+}
+
+</script>
+
+{% endblock %}
