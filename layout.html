@@ -1,0 +1,23 @@
+{% include "layouts/header.html" %}
+
+<div id="flash-root">
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <div class="flash-container">
+            {% for msg in messages %}
+                <div class="flash-message">{{ msg }}</div>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endwith %}
+</div>
+<br>
+{% block content %}{% endblock %}
+
+
+
+
+
+
+{% include "layouts/bottom_bar.html" %}
+{% include "layouts/admin_bottom_bar.html" %}
